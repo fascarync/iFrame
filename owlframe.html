@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Owlwyse</title>
+  <link rel="stylesheet" href="./owlframe.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<!--
+	height=window.getComputedStyle(document.documentElement).getPropertyValue('--frameHeight')
+	width=window.getComputedStyle(document.documentElement).getPropertyValue('--frameWidth')
+-->
+<body onload="init()">
+  <div class="iframe-container">
+    <iframe id="iframeNWS" src="https://radar.weather.gov/" loading="lazy"></iframe>
+	<iframe id="iframeNOAA" src="https://www.weather.gov/forecastmaps/" loading="lazy"></iframe>
+	<iframe id="iframeMappedIn"
+			href="https://www.mappedin.com/"
+			title="Mappedin Map"
+			name="Mappedin Map"
+			allow="clipboard-write; web-share"
+			scrolling="no"
+			width=window.getComputedStyle(document.documentElement).getPropertyValue('--frameWidth')
+			height=window.getComputedStyle(document.documentElement).getPropertyValue('--frameHeight')
+			frameborder="0"
+			style="border:0"
+			src="https://app.mappedin.com/map/6686b845c9f6d6000bc30300?embedded=true"
+			loading="lazy"
+		>
+	</iframe>
+    <iframe id="iframeSkyline" src="https://fascarync.github.io/Skyline/" loading="lazy"></iframe>
+  </div>
+  
+  <div class="button-container">
+  <button onclick="showIframe('iframeNWS')">NWS Radar</button>
+  <button onclick="showIframe('iframeNOAA')">NWS Forecasts</button>
+  <button onclick="showIframe('iframeMappedIn')">mappedIn</button>
+  <button onclick="showIframe('iframeSkyline')">Skyline</button>
+  </div>
+
+  <script>
+    function showIframe(iframeId) {
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(frame => frame.classList.remove('active'));
+
+      const selectedIframe = document.getElementById(iframeId);
+      if (selectedIframe) {
+        selectedIframe.classList.add('active');
+      }
+    }
+	
+	function getPageDimensions() {
+		const pageWidth = Math.max(
+			document.documentElement.clientWidth,
+			document.body.scrollWidth,
+			document.documentElement.scrollWidth,
+			document.body.offsetWidth,
+			document.documentElement.offsetWidth
+		);
+
+		const pageHeight = Math.max(
+			document.documentElement.clientHeight,
+			document.body.scrollHeight,
+			document.documentElement.scrollHeight,
+			document.body.offsetHeight,
+			document.documentElement.offsetHeight
+		);
+
+		return { width: pageWidth, height: pageHeight };
+	}
+	
+	function getBrowserDimensions() {
+		var r = document.querySelector(':root');
+		const windowWidth = window.innerWidth * .90;
+		const windowHeight = window.innerHeight * .90;
+
+		r.style.setProperty('--frameWidth', windowWidth+'px');
+		r.style.setProperty('--frameHeight', windowHeight+'px');
+
+		console.log('Hello');
+		console.log('windowWidth: ' + windowWidth);
+		console.log('windowHeight: ' + windowHeight);
+		console.log('test: ' + window.getComputedStyle(document.documentElement).getPropertyValue('--frameHeight'));
+		return { width: windowWidth, height: windowHeight };
+	}
+	
+	function init() {
+		getBrowserDimensions();
+		window.onresize = getBrowserDimensions;
+		const btn1 = document.getElementById("btn1");
+	}
+	
+  </script>
+</body>
+</html>
