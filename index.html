@@ -15,6 +15,7 @@
   <div class="iframe-container">
     <iframe id="iframeNWS" src="https://radar.weather.gov/" loading="lazy"></iframe>
 	<iframe id="iframeNOAA" src="https://www.weather.gov/forecastmaps/" loading="lazy"></iframe>
+	<iframe id="iframeNexrad" src="	https://www.ncei.noaa.gov/maps/radar/" loading="lazy"></iframe>
 	<iframe id="iframeMappedIn"
 			href="https://www.mappedin.com/"
 			title="Mappedin Map"
@@ -35,6 +36,7 @@
   <div class="button-container">
   <button onclick="showIframe('iframeNWS')">NWS Radar</button>
   <button onclick="showIframe('iframeNOAA')">NWS Forecasts</button>
+  <button onclick="showIframe('iframeNexrad')">NexRad Radar</button>
   <button onclick="showIframe('iframeMappedIn')">mappedIn</button>
   <button onclick="showIframe('iframeSkyline')">Skyline</button>
   </div>
@@ -78,17 +80,14 @@
 		r.style.setProperty('--frameWidth', windowWidth+'px');
 		r.style.setProperty('--frameHeight', windowHeight+'px');
 
-		console.log('Hello');
 		console.log('windowWidth: ' + windowWidth);
 		console.log('windowHeight: ' + windowHeight);
-		console.log('test: ' + window.getComputedStyle(document.documentElement).getPropertyValue('--frameHeight'));
 		return { width: windowWidth, height: windowHeight };
 	}
 	
 	function init() {
 		getBrowserDimensions();
 		window.onresize = getBrowserDimensions;
-		const btn1 = document.getElementById("btn1");
 	}
 	
   </script>
